@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Form Submission Test</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container{
+            margin: 0 auto;
+            width: 98%;
+            max-width: 960px;
+        }
+        .frm__row{
+            margin-bottom: 1em;
+        }
+        label{
+            display: block;
+            font-weight: bold;
+        }
+        input,textarea{
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.8em;
+        }
+        button{
+            padding: 0.8em;
+        }
+        .async-form__message{
+            margin-top: 1em;
+            padding: 1em;
+        }
+        .async-form__message--success{
+            background-color: #c3fad8;
+        }
+        .async-form__message--error{
+            background-color: #fad8c3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Async Form Submission Test</h1>
+        <h2>Form #1</h2>
+        <form action="post-repeater.php" method="post" class="async-form frm">
+            <div class="frm__row">
+                <label for="frm_name">Name</label>
+                <input type="text" name="name" id="frm_name">
+            </div>
+            <div class="frm__row">
+                <label for="frm_firstname">First name</label>
+                <input type="text" name="firstname" id="frm_firstname">
+            </div>
+            <div class="frm__row">
+                <label for="frm_email">E-Mail</label>
+                <input type="email" name="email" id="frm_email">
+            </div>
+            <div class="frm__row">
+                <label for="frm_message">Message</label>
+                <textarea name="message" id="frm_message" rows="8"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+            
+            <div class="async-form__messages"></div>
+
+        </form>
+
+        <hr>
+        <h2>Form #2</h2>
+        <form action="post-repeater.php?simulaterror" method="post" class="async-form frm">
+            <div class="frm__row">
+                <label for="frm_name2">Name</label>
+                <input type="text" name="name2" id="frm_name2">
+            </div>
+            <div class="frm__row">
+                <label for="frm_firstname2">First name</label>
+                <input type="text" name="firstname2" id="frm_firstname2">
+            </div>
+            <div class="frm__row">
+                <label for="frm_emai2l">E-Mail</label>
+                <input type="email" name="email2" id="frm_email2">
+            </div>
+            <div class="frm__row">
+                <label for="frm_message2">Message</label>
+                <textarea name="message" id="frm_message2" rows="8"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+            
+            <div class="async-form__messages"></div>
+
+        </form>
+    </div>
+    
+</body>
+
+<script src="../dist/asyncform.min.js"></script>
+
+
+</html>
