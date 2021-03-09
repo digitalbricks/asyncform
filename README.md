@@ -38,5 +38,12 @@ Now you just have to load the script (or include it in your merge-minify process
 All submittions of this form will then be sent asynchronous to the URL specified in the form `action` attribute.
 
 ## Notes
+### Internet Explorer
+Internet Explorer 11 is currently not supported because it lacks the fetch API.
+
+### No JSON
 This script is currently made for handling text (or html) responses, **no** JSON. If you want to handle JSON responses, the script has to be modified (replace at least `response.text()`with `response.json()`).
 In my usecase for contact forms, I prefer the text results as they act as fallback if the client hasn't JS enabled.
+
+### Button styling
+While the form action url is fetched, the form submit button get disabled an a class called `.async-form__button--fetching`. You may use this for styling.
