@@ -39,7 +39,7 @@ All submittions of this form will then be sent asynchronous to the URL specified
 
 ## Notes
 ### Internet Explorer
-Internet Explorer 11 is currently not supported because it lacks the fetch API.
+Internet Explorer 11 support is realised via polyfills (https://cdn.jsdelivr.net/npm/whatwg-fetch@3.4.0/ and https://cdn.jsdelivr.net/npm/promise-polyfill@8.1.3/) – wich are already included. 
 
 ### No JSON
 This script is currently made for handling text (or html) responses, **no** JSON. If you want to handle JSON responses, the script has to be modified (replace at least `response.text()`with `response.json()`).
