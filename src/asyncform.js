@@ -1,6 +1,6 @@
 /**
  * Asynchronous form submission with vanilla js.
- * @version: 0.1
+ * @version: 1.0
  * @credit: https://gomakethings.com/serializing-form-data-with-the-vanilla-js-formdata-object/  
  */
 
