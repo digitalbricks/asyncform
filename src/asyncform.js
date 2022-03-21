@@ -37,7 +37,7 @@ Array.prototype.forEach.call(forms, function(form) {
 
         // add class to button (for styling)
         // and set to disabled (while fetching)
-        button.classList.add('.async-form__button--fetching');
+        button.classList.add('async-form__button--fetching');
         button.disabled = true;
         
         // submit form via js
@@ -48,7 +48,7 @@ Array.prototype.forEach.call(forms, function(form) {
             // The API call was successful!
             
             // reset button
-            button.classList.remove('.async-form__button--fetching');
+            button.classList.remove('async-form__button--fetching');
             button.disabled = false;
             
             // now we check the HTTP status
