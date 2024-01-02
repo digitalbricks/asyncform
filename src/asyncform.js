@@ -38,7 +38,7 @@ Array.prototype.forEach.call(forms, function(form) {
         // add class to button (for styling)
         // and set to disabled (while fetching)
         button.classList.add('async-form__button--fetching');
-        button.disabled = true;
+        //button.disabled = true; // may harm accessibility, so disabled for now
         
         // submit form via js
         fetch(url, {
@@ -49,7 +49,7 @@ Array.prototype.forEach.call(forms, function(form) {
             
             // reset button
             button.classList.remove('async-form__button--fetching');
-            button.disabled = false;
+            //button.disabled = false; // may harm accessibility, so disabled for now
             
             // now we check the HTTP status
             if (response.ok) {
