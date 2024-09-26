@@ -50,7 +50,14 @@ So, a JSON reponse may look like this:
 {"message":"Some fields are missing","missingFields":["email","firstname"]}
 ```
 
-If `missingFields` is set, the script add a class `.async-form__missing` to all matching fields of the form. You may use this class to highlight such fields visually.
+If `missingFields` is set in the reponse, the script adds a class `.async-form__missing` to all matching fields and labels* of the form. You may use this class to highlight such fields and labels visually.
+
+*For the script to highlight the right label, the `data-for` attribute has to be set on the `label` element. That's necessary because not in all cases the `id` of an field (wich is adressed by the regular `for` attribute of a label) is identical to the field `name`:
+
+```html
+<label for="frm_firstname" data-for="firstname">First name</label>
+<input type="text" id="frm_firstname" name="firstname" >
+```
 
 Have a look in the `/test` folder for a working example (using a simple PHP script as the endpoint).
 
