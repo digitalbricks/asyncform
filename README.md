@@ -41,9 +41,18 @@ All submittions of this form will then be sent asynchronous to the URL specified
 ### Internet Explorer
 Internet Explorer 11 support is realised via polyfills (https://cdn.jsdelivr.net/npm/whatwg-fetch@3.4.0/ and https://cdn.jsdelivr.net/npm/promise-polyfill@8.1.3/) – wich are already included. 
 
-### No JSON
-This script is currently made for handling text (or html) responses, **no** JSON. If you want to handle JSON responses, the script has to be modified (replace at least `response.text()`with `response.json()`).
-In my usecase for contact forms, I prefer the text results as they act as fallback if the client hasn't JS enabled.
+### JSON Response (optional, since v1.3 – 09/2024)
+This script was originally made for handling text (or html) responses only. In version 1.3 I added the ability to respond with JSON – the script will determine between a text or a JSON reponse automatically (so its backward compatablie). When responding with JSON, the script expects the message to be named `message` in the JSON response. You may also add an array of missing fields in that response, named `missingFields`.
+
+So, a JSON reponse may look like this:
+
+```json
+{"message":"Some fields are missing","missingFields":["message4","firstname4"]}
+```
+
+If `missingFields` is set, the script add a class `.async-form__missing` to all matching fields of the form. You may use this class to highlight such fields visually.
+
+Have a look in the `/test` folder for a working example (using a simple PHP script as the endpoint).
 
 ### Button styling
 While the form action url is fetched, the form submit button get disabled an a class called `.async-form__button--fetching`. You may use this for styling.

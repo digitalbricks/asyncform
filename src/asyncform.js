@@ -144,21 +144,34 @@ function getMessageHtml(message, type="success"){
  */
 function markMissingFields(form, fields){
     let className = 'async-form__missing';
-    // remove class from all fields
+    // remove class from all fields and labels
     form.querySelectorAll('.' + className).forEach(function(field){
         field.classList.remove(className);
     });
 
-    // add class to missing fields
+    // add class to missing fields and their labels
     fields.forEach(function(field){
-        let foundField = form.querySelectorAll('[name=' + field + ']');
-        if (foundField.length > 0) {
-           foundField[0].classList.add(className);
+        let foundsFields = form.querySelectorAll('[name=' + field + ']');
+        // add class to field
+        if (foundsFields.length > 0) {
+           foundsFields[0].classList.add(className);
         } 
+
+        // add class to nearest label element
+        let label = form.querySelectorAll('[data-for=' + field + ']');
+        if (label.length > 0) {
+            label[0].classList.add(className);
+         } 
     });
 }
 
-
+/**
+ * Tries to parse a string to JSON.
+ * If it fails, the string is returned.
+ * 
+ * @param string str 
+ * @returns string | object
+ */
 function strOrJson(str) {
     try {
         JSON.parse(str);
@@ -168,6 +181,12 @@ function strOrJson(str) {
     return JSON.parse(str);
 }
 
+/**
+ * Get the missing fields from the response data.
+ * 
+ * @param {*} data
+ * @returns array 
+ */
 function getMissingFields(data){
     // check if data is string or json
     data = strOrJson(data);
