@@ -90,6 +90,9 @@ function bootstrapAsyncForm(){
                 err.text().then(function(data){
                     let message = getMessage(data);
                     messages.innerHTML = getMessageHtml(message, "error");
+
+                    var fields = getMissingFields(data);
+                    markMissingFields(form, fields);
                 })
             
             });
@@ -105,8 +108,9 @@ function bootstrapAsyncForm(){
  * @param {*} data 
  * @returns string 
  */
-function getMessage(data){
+function getMessage(data){    
     // check if data is string or json
+    data = strOrJson(data);
     if(typeof data === "string"){
         return data;
     } else {
@@ -124,6 +128,48 @@ function getMessage(data){
  */
 function getMessageHtml(message, type="success"){
     return "<div class='async-form__message async-form__message--" + type + "'>" + message + "</div>";
+}
+
+/**
+ * Add a class to the missing fields
+ * 
+ * @param object form 
+ * @param array fields 
+ */
+function markMissingFields(form, fields){
+    let className = 'async-form__missing';
+    // remove class from all fields
+    form.querySelectorAll('.' + className).forEach(function(field){
+        field.classList.remove(className);
+    });
+
+    // add class to missing fields
+    fields.forEach(function(field){
+        let foundField = form.querySelectorAll('[name=' + field + ']');
+        if (foundField.length > 0) {
+           foundField[0].classList.add(className);
+        } 
+    });
+}
+
+
+function strOrJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return str;
+    }
+    return JSON.parse(str);
+}
+
+function getMissingFields(data){
+    // check if data is string or json
+    data = strOrJson(data);
+    if(typeof data === "string"){
+        return []; // empty array
+    } else {
+        return data.missingFields;
+    }
 }
 
 

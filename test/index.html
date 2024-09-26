@@ -39,8 +39,14 @@
         .async-form__message--error{
             background-color: #fad8c3;
         }
+        .async-form__missing{
+            outline: 2px solid red;
+        }
 
     </style>
+
+
+    
 </head>
 <body>
     <div class="container">
@@ -118,11 +124,35 @@
             <div class="async-form__messages"></div>
 
         </form>
+
+        <hr>
+        <h2>Form #4 (JSON return type, added in asyncform v1.3, simulated error)</h2>
+        <form action="post-repeater.php?json_missing_fields" method="post" class="async-form frm">
+            <div class="frm__row">
+                <label for="frm_name4">Name</label>
+                <input type="text" name="name4" id="frm_name4" class="async-form__missing" value="test missing – outline should be removed after submit">
+            </div>
+            <div class="frm__row">
+                <label for="frm_firstname4">First name</label>
+                <input type="text" name="firstname4" id="frm_firstname4">
+            </div>
+            <div class="frm__row">
+                <label for="frm_email4">E-Mail</label>
+                <input type="email" name="email4" id="frm_email4">
+            </div>
+            <div class="frm__row">
+                <label for="frm_message4">Message</label>
+                <textarea name="message4" id="frm_message4" rows="8"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+            
+            <div class="async-form__messages"></div>
+
+        </form>
     </div>
     
 </body>
 
 <script src="../dist/asyncform.min.js"></script>
-
 
 </html>
