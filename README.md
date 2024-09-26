@@ -47,7 +47,7 @@ This script was originally made for handling text (or html) responses only. In v
 So, a JSON reponse may look like this:
 
 ```json
-{"message":"Some fields are missing","missingFields":["message4","firstname4"]}
+{"message":"Some fields are missing","missingFields":["email","firstname"]}
 ```
 
 If `missingFields` is set, the script add a class `.async-form__missing` to all matching fields of the form. You may use this class to highlight such fields visually.
