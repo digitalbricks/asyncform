@@ -1,6 +1,6 @@
 /**
  * Asynchronous form submission with vanilla js.
- * @version: 1.2
+ * @version: 1.3
  * @credit: https://gomakethings.com/serializing-form-data-with-the-vanilla-js-formdata-object/  
  */
 
@@ -64,14 +64,21 @@ function bootstrapAsyncForm(){
                 // now we check the HTTP status
                 if (response.ok) {
                     // if ok we return the text from response
-                    return response.text();
-                }
-
+                    // but we determine if it is json or text
+                    let contentType = response.headers.get("content-type");
+                    if(contentType && contentType.includes("application/json")){
+                        return response.json();
+                    } else {
+                        return response.text();
+                    }
+                } 
+                
                 // if not ok, we reject
                 return Promise.reject(response);
-            }).then(function (html) {
-                // update the form messages
-                messages.innerHTML = "<div class='async-form__message async-form__message--success'>" + html + "</div>";
+            }).then(function (data) {
+                let message = getMessage(data);
+                messages.innerHTML = getMessageHtml(message, "success");
+                console.log( messages);
 
                 // reset the form
                 form.reset();
@@ -80,14 +87,43 @@ function bootstrapAsyncForm(){
                 console.warn('Something went wrong.', err);
 
                 // update form message (as err.text() is still a promise we have to use .then())
-                err.text().then(function(html){
-                    messages.innerHTML = "<div class='async-form__message async-form__message--error'>" + html + "</div>";
+                err.text().then(function(data){
+                    let message = getMessage(data);
+                    messages.innerHTML = getMessageHtml(message, "error");
                 })
             
             });
     
         });
     });
+}
+
+/**
+ * Get the message from the response data,
+ * depending if it is a string or json.
+ * 
+ * @param {*} data 
+ * @returns string 
+ */
+function getMessage(data){
+    // check if data is string or json
+    if(typeof data === "string"){
+        return data;
+    } else {
+        return data.message;
+    }
+}
+
+/**
+ * Get the html for the message
+ * with the appropriate CSS class.
+ * 
+ * @param string message 
+ * @param string type 
+ * @returns string
+ */
+function getMessageHtml(message, type="success"){
+    return "<div class='async-form__message async-form__message--" + type + "'>" + message + "</div>";
 }
 
 

@@ -70,7 +70,7 @@
         </form>
 
         <hr>
-        <h2>Form #2</h2>
+        <h2>Form #2 (simulated error)</h2>
         <form action="post-repeater.php?simulaterror" method="post" class="async-form frm">
             <div class="frm__row">
                 <label for="frm_name2">Name</label>
@@ -81,12 +81,37 @@
                 <input type="text" name="firstname2" id="frm_firstname2">
             </div>
             <div class="frm__row">
-                <label for="frm_emai2l">E-Mail</label>
+                <label for="frm_email2">E-Mail</label>
                 <input type="email" name="email2" id="frm_email2">
             </div>
             <div class="frm__row">
                 <label for="frm_message2">Message</label>
-                <textarea name="message" id="frm_message2" rows="8"></textarea>
+                <textarea name="message2" id="frm_message2" rows="8"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+            
+            <div class="async-form__messages"></div>
+
+        </form>
+
+        <hr>
+        <h2>Form #3 (JSON return type, added in asyncform v1.3)</h2>
+        <form action="post-repeater.php?json" method="post" class="async-form frm">
+            <div class="frm__row">
+                <label for="frm_name3">Name</label>
+                <input type="text" name="name3" id="frm_name3">
+            </div>
+            <div class="frm__row">
+                <label for="frm_firstname3">First name</label>
+                <input type="text" name="firstname3" id="frm_firstname3">
+            </div>
+            <div class="frm__row">
+                <label for="frm_email3">E-Mail</label>
+                <input type="email" name="email3" id="frm_email3">
+            </div>
+            <div class="frm__row">
+                <label for="frm_message3">Message</label>
+                <textarea name="message3" id="frm_message3" rows="8"></textarea>
             </div>
             <button type="submit">Submit</button>
             
