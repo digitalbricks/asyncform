@@ -78,7 +78,6 @@ function bootstrapAsyncForm(){
             }).then(function (data) {
                 let message = getMessage(data);
                 messages.innerHTML = getMessageHtml(message, "success");
-                console.log( messages);
 
                 // reset the form
                 form.reset();
@@ -114,8 +113,12 @@ function getMessage(data){
     if(typeof data === "string"){
         return data;
     } else {
-        return data.message;
+        if('message' in data){
+            return data.message;
+        } 
     }
+    console.warn('JSON response does not contain a message key.');
+    return "";
 }
 
 /**
@@ -127,7 +130,10 @@ function getMessage(data){
  * @returns string
  */
 function getMessageHtml(message, type="success"){
-    return "<div class='async-form__message async-form__message--" + type + "'>" + message + "</div>";
+    if(message!==""){
+        return "<div class='async-form__message async-form__message--" + type + "'>" + message + "</div>";
+    }
+    return "";
 }
 
 /**
@@ -168,8 +174,11 @@ function getMissingFields(data){
     if(typeof data === "string"){
         return []; // empty array
     } else {
-        return data.missingFields;
+        if('missingFields' in data){
+            return data.missingFields;
+        }
     }
+    return [];
 }
 
 
